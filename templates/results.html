@@ -1,0 +1,50 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+Results for: {{ first_tag }} + {{ second_tag }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+
+      <h1 class="pt-5 pb-2">You searched for '{{ first_tag }}' and '{{ second_tag }}' </h1>
+
+        <p>Number of works for '{{ first_tag }}' tag:</p>
+        <p>Number of works for '{{ second_tag }}' tag:</p>
+        <p>Number of works for both tags combined:</p>
+        <br>
+
+        <p>This combination of tags was most common for the works in the following fandom:</p>
+        <p>{{ fandom }}</p>
+        <p>Here's more about the plot of that book/movie/TV show: </p>
+        <p>{{ fandom_plot }}</p>
+        <br>
+
+        <p><a href="{{ url_for('index') }}">Return to search page</a></p>
+
+    </div>
+    <div class="col-sm-6">
+
+      <img src="{{ first_photo }}" alt="Photo: {{ first_tag }}" class="img-fluid pt-5">
+      <p><em>Image found for tag: '{{ first_tag }}'</em></p>
+
+      <img src="{{ second_photo }}" alt="Photo: {{ first_tag }}" class="img-fluid pt-5">
+      <p><em>Image found for tag: '{{ second_tag }}'</em></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

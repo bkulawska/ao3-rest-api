@@ -21,15 +21,20 @@ Results for: {{ first_tag }} + {{ second_tag }}
 
       <h1 class="pt-5 pb-2">You searched for '{{ first_tag }}' and '{{ second_tag }}' </h1>
 
-        <p>Number of works for '{{ first_tag }}' tag:</p>
-        <p>Number of works for '{{ second_tag }}' tag:</p>
-        <p>Number of works for both tags combined:</p>
+        <p>Number of works for '{{ first_tag }}': <b>{{ first_numworks }}</b></p>
+        <p>Number of works for '{{ second_tag }}': <b>{{ second_numworks }}</b></p>
+        <p>The tag with more works is <b>'{{ winner }}'</b>.
+            It has <b>{{ diff }}</b> more results than the other one.</p>
+        <p>Number of works for both tags combined: <b>{{ both_numworks }}</b></p>
+        <p>Most popular character in the works containing both of these tags is <b>{{ character }}</b>.</p>
+        <p>Most popular ship in the works containing both of these tags is <b>{{ relationship }}</b>.</p>
+
         <br>
 
         <p>This combination of tags was most common for the works in the following fandom:</p>
-        <p>{{ fandom }}</p>
-        <p>Here's more about the plot of that book/movie/TV show: </p>
-        <p>{{ fandom_plot }}</p>
+        <h1>{{ fandom }}</h1>
+        <p>Here's more about the plot of the fandom: </p>
+        <p><b>{{ fandom_plot }}</b></p>
         <br>
 
         <p><a href="{{ url_for('index') }}">Return to search page</a></p>
@@ -37,10 +42,10 @@ Results for: {{ first_tag }} + {{ second_tag }}
     </div>
     <div class="col-sm-6">
 
-      <img src="{{ first_photo }}" alt="Photo: {{ first_tag }}" class="img-fluid pt-5">
+      <img src="{{ first_photo }}" alt="Sorry, photo for: {{ first_tag }} was not found." class="img-fluid pt-5">
       <p><em>Image found for tag: '{{ first_tag }}'</em></p>
 
-      <img src="{{ second_photo }}" alt="Photo: {{ first_tag }}" class="img-fluid pt-5">
+      <img src="{{ second_photo }}" alt="Sorry, photo for: {{ second_tag }} was not found." class="img-fluid pt-5">
       <p><em>Image found for tag: '{{ second_tag }}'</em></p>
 
     </div>

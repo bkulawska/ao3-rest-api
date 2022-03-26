@@ -6,18 +6,22 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
+from dotenv import load_dotenv
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'C2HWGVoMGfNTBsrYQg8EfAb'
 Bootstrap(app)
 
+load_dotenv()
+EXTERNAL_API_KEY = os.getenv('EXTERNAL_API_KEY')
+
 
 async def ask_image_external_api(tag, session):
     bing_url = "https://bing-image-search1.p.rapidapi.com/images/search?q=" + tag
     headers = {
         'x-rapidapi-host': "bing-image-search1.p.rapidapi.com",
-        'x-rapidapi-key': "2f53c04e38msh7d8017281ad03a0p1c00d0jsn00a7f9711a23"
+        'x-rapidapi-key': EXTERNAL_API_KEY
     }
     async with session.get(bing_url, headers=headers) as bing_response:
         if bing_response.status != 200:
@@ -64,7 +68,7 @@ async def ask_ao3_and_moviedb_external_api(first_tag, second_tag, session):
             id_url = "https://online-movie-database.p.rapidapi.com/title/find?q=" + fandom
             headers = {
                 'x-rapidapi-host': "online-movie-database.p.rapidapi.com",
-                'x-rapidapi-key': "2f53c04e38msh7d8017281ad03a0p1c00d0jsn00a7f9711a23"
+                'x-rapidapi-key': EXTERNAL_API_KEY
             }
             async with session.get(id_url, headers=headers) as id_response:
                 if id_response.status != 200:
@@ -155,4 +159,4 @@ def external_server_error(e):
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
